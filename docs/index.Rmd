@@ -29,6 +29,7 @@ g + geom_point()
 ### I need color!
 
 ```{r add color}
+g + geom_point(aes(color = class))
 ```
 
 
