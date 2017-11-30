@@ -15,7 +15,7 @@ library(tidyverse)
 ```
 
 
-## scatterplot
+## scatterplot 
 
 ```{r Scatterplot}
 
