@@ -15,7 +15,7 @@ library(tidyverse)
 ```
 
 
-## scatterplot  
+## `geom_point`  
 
 ```{r Scatterplot}
 
@@ -26,7 +26,7 @@ g <- ggplot(data = mpg, aes(x = displ, y = hwy))
 g + geom_point()
 ```
 
-### I need color!
+### `color`!
 
 ```{r add color}
 g + geom_point(aes(color = class))
@@ -37,10 +37,12 @@ ggplot(data = mpg, aes(x = displ, y = hwy, color = class)) +
 
 ```
 
-### but i need black and white
+### change `color` to `shape`
 ```{r BWplot}
 ggplot(data = mpg, aes(x = displ, y = hwy, shape = class)) +
   geom_point()
 ```
+
+###
 
 ## Boxplot
