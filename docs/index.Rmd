@@ -168,5 +168,80 @@ y <- gapminder %>%
 
 ```
 
-Everything above, we were operating on entire data set.  Can also look at just one c
+## select() by columns
+
+```{r}
+select(gapminder, year, lifeExp)
+
+## with pipe
+
+gapminder %>%
+  select(year, lifeExp) %>%
+  tail()
+
+## combine what we've learned
+
+gapminder %>%
+    filter(country == "Cambodia") %>%
+    select(country, year, pop, gdpPercap)
+
+## with less typing because there are fewer things we don't want than do want
+
+gapminder %>%
+    filter(country == "Cambodia") %>%
+    select(-continent, -lifeExp)
+
+## filter for more than one thing
+gapminder %>%
+  filter(country == "Mexico", year == 2002)
+
+
+## keyboard shortcut to indent highlight command i
+
+## `mutate` to add columns
+
+gapminder %>%
+  mutate(gdp = pop * gdpPercap)
+
+## let's add an index column
+gapminder %>%
+  mutate(index = 1:nrow(gapminder))
+
+## could do both at the same time
+gapminder %>%
+  mutate(gdp = pop * gdpPercap) %>%
+  mutate(index = 1:nrow(gapminder))
+
+## or
+gapminder %>%
+  mutate(gdp = pop * gdpPercap, 
+         index = 1:nrow(gapminder))
+
+## 6.10.1 exercise but this gives us a single value
+gapminder %>%
+  filter(country %in% c("Egypt", "Vietnam")) %>%
+  mutate(maxgdpPercap = max(gdpPercap))
+
+## group_by() so we can get 2 values one for each country
+gapminder %>%
+  filter(country %in% c("Egypt", "Vietnam")) %>%
+  group_by(country) %>%
+  summarize(max_gdpPercap = max(gdpPercap))
+
+## if you do mutate rather than summarize then it will repeat the value in the original data frame: mutate(max_gdpPercap = max(gdpPercap))
+
+## do for ALL countries
+gapminder %>%
+  group_by(country) %>%
+  summarize(max_gdpPercap = max(gdpPercap))
+
+## keep year associated with the max
+gapminder %>%
+  group_by(country) %>%
+  mutate(max_gdpPercap = max(gdpPercap)) %>%
+  filter(max_gdpPercap == gdpPercap) %>%
+  arrange(max_gdpPercap) # if you want descenindg order
+  
+
+```
 
